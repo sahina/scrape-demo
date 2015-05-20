@@ -12,7 +12,6 @@ class ServerSpider(CrawlSpider):
     ]
 
     rules = [
-        # Rule(LinkExtractor(allow='.*'), callback='parse_links', follow=True),
         Rule(LinkExtractor(allow='countries\.html'), callback='parse_countries', follow=True),
         Rule(LinkExtractor(allow='c-.*\.html'), callback='parse_country', follow=True)
     ]
