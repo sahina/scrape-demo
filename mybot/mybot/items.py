@@ -3,8 +3,11 @@ from scrapy import Field, Item
 
 
 class CountryItem(Item):
-    name = Field()
+    country_name = Field()
     url = Field()
 
+class CountryDetailItem(Item):
+    country_detail_name = Field()
+
 class TeamItem(Item):
-    name = Field()
+    team_name = Field()
