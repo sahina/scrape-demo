@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
-import scrapy
+from scrapy.contrib.spiders import CrawlSpider, Rule
+from scrapy.contrib.linkextractors import LinkExtractor
 
 
-class ServerSpider(scrapy.Spider):
+class ServerSpider(CrawlSpider):
     name = "server"
-    allowed_domains = ["localhost:8090"]
-    start_urls = (
-        'http://localhost:8090',
-    )
+    allowed_domains = ["localhost"]
+    start_urls = [
+        'http://localhost:8080/index.html'
+    ]
 
-    def parse(self, response):
-        pass
+    rules = [
+        Rule(LinkExtractor(allow='.*'), follow=True, callback='parse_links')
+    ]
+
+    def parse_links(self, response):
+        print '>>> parse_links'
+
