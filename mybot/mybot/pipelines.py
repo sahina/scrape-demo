@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
+from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy import Request
+from scrapy.exceptions import DropItem
 
 
 class StandingsPipeline(object):
@@ -20,6 +23,14 @@ class CountryFlagPipeline(object):
             item['country_flag_url2'] = item['country_flag_url3'].replace('flags/3/', 'flags/2/')
             item['country_flag_url4'] = item['country_flag_url3'].replace('flags/3/', 'flags/4/')
             item['country_flag_url5'] = item['country_flag_url3'].replace('flags/3/', 'flags/5/')
+
+            item['image_urls'] = []
+            item['image_urls'].append(item['country_flag_url1'])
+            item['image_urls'].append(item['country_flag_url2'])
+            item['image_urls'].append(item['country_flag_url3'])
+            item['image_urls'].append(item['country_flag_url4'])
+            item['image_urls'].append(item['country_flag_url5'])
+
         return item
 
 
@@ -27,4 +38,22 @@ class LeagueLogoPipeline(object):
     def process_item(self, item, spider):
         if 'league_logo_url_s' in item:
             item['league_logo_url_m'] = item['league_logo_url_s'].replace('logos/s/', 'logos/m/')
+
+            item['image_urls'] = []
+            item['image_urls'].append(item['league_logo_url_s'])
+            item['image_urls'].append(item['league_logo_url_m'])
+        return item
+
+
+class FifaImagesPipeline(ImagesPipeline):
+    def get_media_requests(self, item, info):
+        if 'image_urls' in item:
+            for image_url in item['image_urls']:
+                yield Request(image_url)
+
+    def item_completed(self, results, item, info):
+        image_paths = [x['path'] for ok, x in results if ok]
+        # if not image_paths:
+        #     raise DropItem("Item contains no images")
+        item['image_paths'] = image_paths
         return item

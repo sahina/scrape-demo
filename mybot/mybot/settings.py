@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-
-# Scrapy settings for mybot project
-#
-# For simplicity, this file contains only the most important settings by
-# default. All the other settings are documented here:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#
+import os
 
 BOT_NAME = 'mybot'
 
@@ -17,7 +10,13 @@ ITEM_PIPELINES = {
     'mybot.pipelines.StandingsPipeline': 400,
     'mybot.pipelines.CountryFlagPipeline': 200,
     'mybot.pipelines.LeagueLogoPipeline': 500,
+    'mybot.pipelines.FifaImagesPipeline': 600
 }
 
+CUR_DIR = os.path.dirname(os.path.realpath(__file__))
+IMAGES_STORE = os.path.join(CUR_DIR, 'fifa-img')
+
+DOWNLOAD_DELAY = 0.25
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'mybot (+http://www.yourdomain.com)'
+USER_AGENT = 'uefa (+http://www.uefa.com)'

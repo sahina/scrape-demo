@@ -13,6 +13,9 @@ class CountryItem(Item):
     country_flag_url5 = Field()
     confederation_alias = Field()
     association_url = Field()
+    image_urls = Field()
+    image_paths = Field()
+    images = Field()
 
 
 class CountryLoader(ItemLoader):
@@ -32,6 +35,9 @@ class AssociationItem(Item):
     league_logo_url_s = Field()
     league_logo_url_m = Field()
     standings_url = Field()
+    image_urls = Field()
+    image_paths = Field()
+    images = Field()
 
 
 class AssociationLoader(ItemLoader):
@@ -44,6 +50,9 @@ class StandingsItem(Item):
     club_name = Field()
     club_id = Field()
     club_url = Field()
+    image_urls = Field()
+    image_paths = Field()
+    images = Field()
 
 
 class StandingsLoader(ItemLoader):
