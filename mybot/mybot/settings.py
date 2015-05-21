@@ -14,7 +14,8 @@ SPIDER_MODULES = ['mybot.spiders']
 NEWSPIDER_MODULE = 'mybot.spiders'
 
 ITEM_PIPELINES = {
-    'mybot.pipelines.StandingsPipeline': 300
+    'mybot.pipelines.StandingsPipeline': 400,
+    'mybot.pipelines.CountryFlagPipeline': 200,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
