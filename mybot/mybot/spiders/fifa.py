@@ -21,8 +21,6 @@ class ServerSpider(CrawlSpider):
     ]
 
     def parse_countries(self, response):
-        print '*************** parse_countries >>>  {0} ***************'.format(response.url)
-
         for a in response.xpath("//li[@data-confederation]"):
             l = CountryLoader(item=CountryItem(), response=response)
 
@@ -35,8 +33,6 @@ class ServerSpider(CrawlSpider):
             yield l.load_item()
 
     def parse_associations(self, response):
-        print 'parse_country >>> {0} ***************'.format(response.url)
-
         l = AssociationLoader(item=AssociationItem(), response=response)
 
         l.add_value('item', 'association')
@@ -49,8 +45,6 @@ class ServerSpider(CrawlSpider):
         yield l.load_item()
 
     def parse_standings(self, response):
-        print 'parse_standings >>>  {0} ***************'.format(response.url)
-
         league_id = response.xpath("//div[@data-type='standings']/@data-id").extract()
 
         for club in response.xpath("//div[@data-type='standings']/table/tbody/tr[@data-filter]"):

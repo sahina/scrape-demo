@@ -2,7 +2,6 @@
 import re
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from scrapy import Request
-from scrapy.exceptions import DropItem
 
 
 class StandingsPipeline(object):
@@ -53,7 +52,5 @@ class FifaImagesPipeline(ImagesPipeline):
 
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
-        # if not image_paths:
-        #     raise DropItem("Item contains no images")
         item['image_paths'] = image_paths
         return item
