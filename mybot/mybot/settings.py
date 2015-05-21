@@ -16,6 +16,7 @@ NEWSPIDER_MODULE = 'mybot.spiders'
 ITEM_PIPELINES = {
     'mybot.pipelines.StandingsPipeline': 400,
     'mybot.pipelines.CountryFlagPipeline': 200,
+    'mybot.pipelines.LeagueLogoPipeline': 500,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

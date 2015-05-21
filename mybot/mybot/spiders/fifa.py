@@ -13,11 +13,11 @@ class ServerSpider(CrawlSpider):
     rules = [
         Rule(LinkExtractor(allow="associations\/index\.html", restrict_xpaths="//*[@id='mitem-associations']/a"),
              callback='parse_countries', follow=True),
-        # Rule(LinkExtractor(allow="associations\/association=.{3}\/index\.html", restrict_xpaths="//li[@data-confederation]"),
-        #      callback='parse_associations', follow=True),
-        # Rule(LinkExtractor(allow="nationalleagues\/nationalleague=.*\/standings\/index\.html",
-        #                    restrict_xpaths="//div[@class='ma-standing-and-scorer']//a"),
-        #      callback='parse_standings', follow=True)
+        Rule(LinkExtractor(allow="associations\/association=.{3}\/index\.html", restrict_xpaths="//li[@data-confederation]"),
+             callback='parse_associations', follow=True),
+        Rule(LinkExtractor(allow="nationalleagues\/nationalleague=.*\/standings\/index\.html",
+                           restrict_xpaths="//div[@class='ma-standing-and-scorer']//a"),
+             callback='parse_standings', follow=True)
     ]
 
     def parse_countries(self, response):
