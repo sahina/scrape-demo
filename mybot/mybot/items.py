@@ -4,6 +4,7 @@ from scrapy.contrib.loader.processor import TakeFirst
 
 
 class CountryItem(Item):
+    item = Field()
     country_name = Field()
     country_flag_url1 = Field()
     country_flag_url2 = Field()
@@ -19,6 +20,7 @@ class CountryLoader(ItemLoader):
 
 
 class AssociationItem(Item):
+    item = Field()
     country_name = Field()
     country_flag_url1 = Field()
     country_flag_url2 = Field()
@@ -36,5 +38,13 @@ class AssociationLoader(ItemLoader):
     default_output_processor = TakeFirst()
 
 
-class TeamItem(Item):
-    team_name = Field()
+class StandingsItem(Item):
+    item = Field()
+    league_id = Field()
+    club_name = Field()
+    club_id = Field()
+    club_url = Field()
+
+
+class StandingsLoader(ItemLoader):
+    default_output_processor = TakeFirst()
