@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
-from mybot.items import CountryItem, CountryDetailItem, TeamItem
+from mybot.items import CountryItem, AssociationItem, TeamItem
 
 
 class ServerSpider(CrawlSpider):
@@ -26,7 +26,6 @@ class ServerSpider(CrawlSpider):
 
             yield item
 
-
     def parse_countries(self, response):
         print 'parse_countries >>>  {0} ***************'.format(response.url)
 
@@ -36,11 +35,11 @@ class ServerSpider(CrawlSpider):
             item["url"] = c.xpath('./@href').extract()
 
             yield item
-        
+
     def parse_country_details(self, response):
         print 'parse_country_details >>>  {0} ***************'.format(response.url)
 
-        item = CountryDetailItem()
+        item = AssociationItem()
         item["country_detail_name"] = response.xpath("//h1/text()").extract()
 
         yield item
